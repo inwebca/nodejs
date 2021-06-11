@@ -1,17 +1,15 @@
-const Http = require("http");
-const Logger = require("./logger");
+const express = require("express");
 
-const logger = new Logger();
-logger.on("test", (args) => console.log("test1111", args));
-logger.log("test");
+const server = express();
 
-const server = Http.createServer((req, res) => {
-if(req.url === '/'){
-    res.write('hello');
-    res.end();
-}
+server.get('/', (req, res) => {
+    res.send('Hello');
 });
 
-server.listen(3000);
+server.get('/about', (req, res) => {
+    res.send('About');
+});
 
-console.log("port 3000");
+server.listen(3000, () => {
+    console.log('server running');
+})
